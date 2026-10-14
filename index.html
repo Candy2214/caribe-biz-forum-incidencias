@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Caribe Biz Forum 2026 — Reporte de Incidencias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: dark;
+    --bg-0: #07100d;
+    --bg-1: #0d1a16;
+    --bg-2: #122420;
+    --card: rgba(255,255,255,0.045);
+    --card-border: rgba(255,255,255,0.09);
+    --accent: #D4FA3A;
+    --accent-dim: #9fc92a;
+    --accent-ink: #0a1206;
+    --text-0: #f4f7ef;
+    --text-1: #b7c2b6;
+    --text-2: #7c887c;
+    --danger: #ff6b6b;
+    --ok: #7ef29a;
+    --ok-ink: #06200f;
+    --radius: 16px;
+    --shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(212,250,58,0.08), transparent 60%),
+      radial-gradient(700px 500px at 110% 10%, rgba(80,160,120,0.10), transparent 55%),
+      linear-gradient(180deg, var(--bg-0), var(--bg-1) 40%, var(--bg-2));
+    color: var(--text-0);
+    min-height: 100%;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 680px; margin: 0 auto; padding: 48px 20px 72px; }
+
+  header.hero { text-align: center; margin-bottom: 40px; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-1);
+    border: 1px solid var(--card-border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--card);
+    margin-bottom: 22px;
+  }
+  .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+  h1.brand {
+    font-family: 'Anton', sans-serif;
+    font-weight: 400;
+    line-height: 0.92;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: clamp(38px, 11vw, 68px);
+    color: var(--text-0);
+    letter-spacing: 0.01em;
+  }
+  h1.brand .hl { color: var(--accent); display: block; }
+  h1.brand .yr {
+    display: block;
+    -webkit-text-stroke: 1.5px var(--text-1);
+    color: transparent;
+    font-size: 0.5em;
+    margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  p.tagline { margin: 22px auto 0; max-width: 440px; color: var(--text-1); font-size: 15px; line-height: 1.5; }
+
+  .card { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); box-shadow: var(--shadow); backdrop-filter: blur(6px); }
+
+  .form-card { padding: 26px; margin-bottom: 28px; }
+
+  label.field-label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-1);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  .field-group { margin-bottom: 18px; }
+  .field-group:last-of-type { margin-bottom: 0; }
+
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-0);
+    font-family: inherit;
+    font-size: 15.5px;
+    padding: 13px 16px;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+
+  textarea#incidentText {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-0);
+    font-family: inherit;
+    font-size: 15.5px;
+    line-height: 1.5;
+    padding: 14px 16px;
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  textarea#incidentText::placeholder, input::placeholder { color: var(--text-2); }
+  textarea#incidentText:focus, input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,250,58,0.15); }
+
+  .form-footer { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 18px; flex-wrap: wrap; }
+
+  button.btn-primary {
+    appearance: none;
+    border: none;
+    cursor: pointer;
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 14.5px;
+    letter-spacing: 0.02em;
+    padding: 13px 26px;
+    border-radius: 999px;
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease, background .2s ease, color .2s ease;
+    box-shadow: 0 10px 25px -8px rgba(212,250,58,0.5);
+    white-space: nowrap;
+  }
+  button.btn-primary:hover { transform: translateY(-1px); }
+  button.btn-primary:active { transform: translateY(0); }
+  button.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+  button.btn-primary.success-pulse { background: var(--ok); color: var(--ok-ink); animation: pulseGlow 0.9s ease-out; }
+  @keyframes pulseGlow {
+    0%   { box-shadow: 0 0 0 0 rgba(126,242,154,0.55); }
+    70%  { box-shadow: 0 0 0 28px rgba(126,242,154,0); }
+    100% { box-shadow: 0 0 0 0 rgba(126,242,154,0); }
+  }
+
+  .confetti-piece {
+    position: fixed;
+    width: 7px; height: 7px;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    animation: confettiPop 0.85s cubic-bezier(.2,.8,.3,1) forwards;
+  }
+  @keyframes confettiPop {
+    0%   { transform: translate(-50%,-50%) translate(0,0) rotate(0deg) scale(1); opacity: 1; }
+    100% { transform: translate(-50%,-50%) translate(var(--dx), var(--dy)) rotate(var(--rot)) scale(0.5); opacity: 0; }
+  }
+
+  .status { font-size: 13px; font-weight: 600; min-height: 18px; }
+  .status.success { color: var(--ok); }
+  .status.error { color: var(--danger); }
+
+  .admin-link-row { text-align: center; margin-top: 36px; }
+  .admin-link { font-size: 11.5px; color: var(--text-2); text-decoration: none; letter-spacing: 0.04em; border-bottom: 1px dotted var(--card-border); padding-bottom: 1px; cursor: pointer; }
+  .admin-link:hover { color: var(--text-1); }
+
+  footer.brand-footer { text-align: center; margin-top: 20px; color: var(--text-2); font-size: 11.5px; letter-spacing: 0.04em; }
+  footer.brand-footer strong { color: var(--text-1); }
+
+  .admin-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; gap: 10px; }
+  .admin-topbar .back-link { font-size: 13px; color: var(--text-1); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .admin-topbar .back-link:hover { color: var(--accent); }
+  .admin-title { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.02em; font-size: 22px; color: var(--text-0); }
+
+  .login-card { padding: 30px 26px; margin-top: 18px; }
+  .login-card .field-group { margin-bottom: 16px; }
+  .login-error { color: var(--danger); font-size: 13px; margin-top: 4px; min-height: 16px; }
+  button.btn-block { width: 100%; }
+
+  .log-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+  .log-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; color: var(--text-0); }
+  .count-badge { background: rgba(212,250,58,0.14); color: var(--accent); font-size: 12px; font-weight: 800; padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(212,250,58,0.3); }
+
+  button.btn-ghost {
+    appearance: none;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--card-border);
+    color: var(--text-1);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 16px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color .15s ease, color .15s ease;
+    white-space: nowrap;
+  }
+  button.btn-ghost:hover { border-color: var(--accent-dim); color: var(--accent); }
+  button.btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  #adminList { display: flex; flex-direction: column; gap: 10px; }
+
+  .incident-card { padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; }
+  .incident-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .incident-reporter { font-size: 13px; font-weight: 700; color: var(--accent); }
+  .incident-text { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--text-0); white-space: pre-wrap; word-break: break-word; }
+  .incident-time { font-size: 11.5px; color: var(--text-2); letter-spacing: 0.02em; }
+
+  .empty-state { text-align: center; padding: 36px 20px; color: var(--text-2); font-size: 14px; }
+
+  .logout-link { font-size: 12px; color: var(--text-2); text-decoration: underline; cursor: pointer; background: none; border: none; font-family: inherit; padding: 0; }
+  .logout-link:hover { color: var(--text-1); }
+
+  ::selection { background: rgba(212,250,58,0.3); }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 32px 16px 56px; }
+    .form-footer { flex-direction: column-reverse; align-items: stretch; }
+    .form-footer .status { text-align: center; }
+    button.btn-primary { width: 100%; }
+    .log-header { flex-direction: column; align-items: flex-start; }
+    button.btn-ghost { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="wrap" id="view-home">
+    <header class="hero">
+      <span class="eyebrow"><span class="dot"></span>Cámara de Comercio de Barranquilla</span>
+      <h1 class="brand">
+        <span class="hl">Caribe Biz</span>
+        Forum
+        <span class="yr">2026</span>
+      </h1>
+      <p class="tagline">Reporte de incidencias del evento. Indica tu nombre, describe lo ocurrido y envíalo — quedará registrado para el equipo organizador.</p>
+    </header>
+
+    <form class="card form-card" id="form">
+      <div class="field-group">
+        <label class="field-label" for="reporterName">Tu nombre</label>
+        <input type="text" id="reporterName" placeholder="Nombre de quien reporta" required>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="incidentText">Describe la incidencia</label>
+        <textarea id="incidentText" placeholder="Ej: Falla de sonido en el salón principal, falta señalización en el acceso norte, etc." required></textarea>
+      </div>
+      <div class="form-footer">
+        <span class="status" id="status"></span>
+        <button type="submit" class="btn-primary" id="submitBtn">Enviar registro</button>
+      </div>
+    </form>
+
+    <div class="admin-link-row">
+      <a class="admin-link" href="#admin">Acceso administrador</a>
+    </div>
+
+    <footer class="brand-footer">
+      <strong>Caribe Biz Forum 2026</strong> · Cámara de Comercio de Barranquilla
+    </footer>
+  </div>
+
+  <div class="wrap" id="view-admin" style="display:none;">
+    <div class="admin-topbar">
+      <a class="back-link" href="#">← Volver al formulario</a>
+      <span class="admin-title">Admin</span>
+    </div>
+    <div id="adminInner"></div>
+  </div>
+
+  <script type="module">
+    // ──────────────────────────────────────────────────────────────
+    // 1) PEGA AQUÍ TU firebaseConfig (lo copiaste del paso 2 de la
+    //    configuración de Firebase). Reemplaza TODO este objeto.
+    // ──────────────────────────────────────────────────────────────
+    const firebaseConfig = {
+      apiKey: "AIzaSyCrDs0QxOUU1vTrzj4rDFMoLfUwDTZmsT8",
+      authDomain: "caribe-biz-forum.firebaseapp.com",
+      projectId: "caribe-biz-forum",
+      storageBucket: "caribe-biz-forum.firebasestorage.app",
+      messagingSenderId: "627256483183",
+      appId: "1:627256483183:web:507a7f0272323828469c9a"
+    };
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import {
+      getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const incidentsCol = collection(db, "incidencias");
+
+    let incidents = [];
+    let subscribed = false;
+
+    const homeEl = document.getElementById('view-home');
+    const adminEl = document.getElementById('view-admin');
+    const adminInner = document.getElementById('adminInner');
+
+    const formEl = document.getElementById('form');
+    const reporterEl = document.getElementById('reporterName');
+    const textareaEl = document.getElementById('incidentText');
+    const submitBtn = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('status');
+
+    const AUTH_KEY = 'ccb_admin_auth';
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function formatDate(ts) {
+      try {
+        var d = (ts && ts.toDate) ? ts.toDate() : new Date(ts);
+        return d.toLocaleString('es-CO', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+      } catch (e) { return ''; }
+    }
+
+    function setStatus(msg, kind) {
+      statusEl.textContent = msg || '';
+      statusEl.className = 'status' + (kind ? ' ' + kind : '');
+    }
+
+    function burstConfetti(originEl) {
+      var rect = originEl.getBoundingClientRect();
+      var originX = rect.left + rect.width / 2;
+      var originY = rect.top + rect.height / 2;
+      var colors = ['#D4FA3A', '#ffffff', '#7ef29a', '#9fc92a'];
+      for (var i = 0; i < 22; i++) {
+        var el = document.createElement('div');
+        el.className = 'confetti-piece';
+        var angle = Math.random() * Math.PI * 2;
+        var dist = 60 + Math.random() * 90;
+        var dx = Math.cos(angle) * dist;
+        var dy = Math.sin(angle) * dist - 30;
+        el.style.left = originX + 'px';
+        el.style.top = originY + 'px';
+        el.style.background = colors[i % colors.length];
+        el.style.setProperty('--dx', dx + 'px');
+        el.style.setProperty('--dy', dy + 'px');
+        el.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        document.body.appendChild(el);
+        (function (node) { setTimeout(function () { node.remove(); }, 900); })(el);
+      }
+    }
+
+    function isAuthed() {
+      try { return sessionStorage.getItem(AUTH_KEY) === '1'; } catch (e) { return false; }
+    }
+    function setAuthed(val) {
+      try {
+        if (val) sessionStorage.setItem(AUTH_KEY, '1');
+        else sessionStorage.removeItem(AUTH_KEY);
+      } catch (e) {}
+    }
+
+    function renderIncidentList() {
+      var listEl = document.getElementById('adminList');
+      var countEl = document.getElementById('adminCount');
+      var downloadBtn = document.getElementById('downloadBtn');
+      if (!listEl) return;
+      if (countEl) countEl.textContent = incidents.length;
+      if (downloadBtn) downloadBtn.disabled = incidents.length === 0;
+
+      if (incidents.length === 0) {
+        listEl.innerHTML = '<div class="empty-state">Aún no hay incidencias reportadas.</div>';
+        return;
+      }
+      listEl.innerHTML = incidents.map(function (doc) {
+        return '<div class="card incident-card">' +
+          '<div class="incident-meta">' +
+            '<span class="incident-reporter">' + escapeHtml(doc.reporter || 'Anónimo') + '</span>' +
+            '<span class="incident-time">' + formatDate(doc.ts) + '</span>' +
+          '</div>' +
+          '<p class="incident-text">' + escapeHtml(doc.text || '') + '</p>' +
+        '</div>';
+      }).join('');
+    }
+
+    function buildMarkdown() {
+      var lines = [];
+      lines.push('# Incidencias — Caribe Biz Forum 2026');
+      lines.push('');
+      lines.push('_Cámara de Comercio de Barranquilla_');
+      lines.push('');
+      lines.push('Generado: ' + new Date().toLocaleString('es-CO'));
+      lines.push('');
+      lines.push('Total de incidencias: ' + incidents.length);
+      lines.push('');
+      lines.push('---');
+      lines.push('');
+      incidents.forEach(function (doc, i) {
+        lines.push('## Incidencia ' + (incidents.length - i));
+        lines.push('');
+        lines.push('**Reportado por:** ' + (doc.reporter || 'Anónimo'));
+        lines.push('');
+        lines.push('**Fecha:** ' + formatDate(doc.ts));
+        lines.push('');
+        lines.push(doc.text || '');
+        lines.push('');
+        lines.push('---');
+        lines.push('');
+      });
+      return lines.join('\n');
+    }
+
+    function downloadMarkdown() {
+      var md = buildMarkdown();
+      var blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'incidencias-caribe-biz-forum-2026.md';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }
+
+    function ensureSubscribed() {
+      if (subscribed) return;
+      subscribed = true;
+      var q = query(incidentsCol, orderBy('ts', 'desc'), limit(500));
+      onSnapshot(q, function (snap) {
+        incidents = snap.docs.map(function (d) {
+          var data = d.data() || {};
+          return { id: d.id, text: data.text, reporter: data.reporter, ts: data.ts };
+        });
+        renderIncidentList();
+      }, function (err) {
+        console.error('onSnapshot error', err);
+      });
+    }
+
+    function renderAdminPanel() {
+      adminInner.innerHTML =
+        '<div class="log-header">' +
+          '<span class="log-title">Incidencias reportadas <span class="count-badge" id="adminCount">0</span></span>' +
+          '<button type="button" class="btn-ghost" id="downloadBtn" disabled>⬇ Descargar registro (.md)</button>' +
+        '</div>' +
+        '<div id="adminList"><div class="empty-state">Cargando…</div></div>' +
+        '<div class="admin-link-row"><button type="button" class="logout-link" id="logoutBtn">Cerrar sesión de administrador</button></div>';
+
+      document.getElementById('downloadBtn').addEventListener('click', downloadMarkdown);
+      document.getElementById('logoutBtn').addEventListener('click', function () {
+        setAuthed(false);
+        renderAdminView();
+      });
+
+      ensureSubscribed();
+      renderIncidentList();
+    }
+
+    function renderAdminLogin(errorMsg) {
+      adminInner.innerHTML =
+        '<div class="card login-card">' +
+          '<div class="field-group">' +
+            '<label class="field-label" for="adminUser">Usuario</label>' +
+            '<input type="text" id="adminUser" autocomplete="username">' +
+          '</div>' +
+          '<div class="field-group">' +
+            '<label class="field-label" for="adminPass">Contraseña</label>' +
+            '<input type="password" id="adminPass" autocomplete="current-password">' +
+          '</div>' +
+          '<div class="login-error" id="loginError">' + (errorMsg ? escapeHtml(errorMsg) : '') + '</div>' +
+          '<button type="button" class="btn-primary btn-block" id="loginBtn">Ingresar</button>' +
+        '</div>';
+
+      var userInput = document.getElementById('adminUser');
+      var passInput = document.getElementById('adminPass');
+      var loginBtn = document.getElementById('loginBtn');
+      var loginError = document.getElementById('loginError');
+
+      function tryLogin() {
+        var u = (userInput.value || '').trim().toLowerCase();
+        var p = (passInput.value || '').trim();
+        if (u === 'admin' && p === 'ccb') {
+          setAuthed(true);
+          renderAdminView();
+        } else {
+          loginError.textContent = 'Usuario o contraseña incorrectos.';
+          passInput.value = '';
+          passInput.focus();
+        }
+      }
+
+      loginBtn.addEventListener('click', tryLogin);
+      passInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') tryLogin(); });
+      userInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') passInput.focus(); });
+    }
+
+    function renderAdminView() {
+      if (isAuthed()) renderAdminPanel();
+      else renderAdminLogin();
+    }
+
+    function route() {
+      var hash = location.hash.replace('#', '');
+      if (hash === 'admin') {
+        homeEl.style.display = 'none';
+        adminEl.style.display = 'block';
+        renderAdminView();
+      } else {
+        adminEl.style.display = 'none';
+        homeEl.style.display = 'block';
+      }
+    }
+    window.addEventListener('hashchange', route);
+
+    formEl.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var reporter = reporterEl.value.trim();
+      var text = textareaEl.value.trim();
+      if (!reporter || !text) {
+        setStatus('Completa tu nombre y la descripción.', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
+      setStatus('');
+
+      try {
+        await addDoc(incidentsCol, { text: text, reporter: reporter, ts: Date.now() });
+        textareaEl.value = '';
+        submitBtn.classList.add('success-pulse');
+        submitBtn.textContent = '✓ ¡Registrada!';
+        burstConfetti(submitBtn);
+        setStatus('Incidencia registrada correctamente.', 'success');
+        setTimeout(function () {
+          submitBtn.classList.remove('success-pulse');
+          submitBtn.textContent = 'Enviar registro';
+          submitBtn.disabled = false;
+        }, 1600);
+      } catch (err) {
+        console.error('submit error', err);
+        setStatus('No se pudo registrar. Intenta de nuevo.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar registro';
+      }
+
+      setTimeout(function () { setStatus(''); }, 5000);
+    });
+
+    route();
+  </script>
+</body>
+</html>
